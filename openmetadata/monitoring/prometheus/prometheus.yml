@@ -1,0 +1,32 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # OpenMetadata Server - Admin Metrics (Dropwizard/Prometheus format)
+  - job_name: 'openmetadata'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['openmetadata-server:8586']
+        labels:
+          service: 'openmetadata-server'
+
+  # # Elasticsearch Exporter
+  # - job_name: 'elasticsearch'
+  #   static_configs:
+  #     - targets: ['elasticsearch-exporter:9114']
+
+  # # MySQL Exporter
+  # - job_name: 'mysql'
+  #   static_configs:
+  #     - targets: ['mysql-exporter:9104']
+
+  # cAdvisor - Container Metrics
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+
+  # # Prometheus self-monitoring
+  # - job_name: 'prometheus'
+  #   static_configs:
+  #     - targets: ['localhost:9090']
